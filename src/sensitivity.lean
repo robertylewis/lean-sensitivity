@@ -360,8 +360,6 @@ begin
   linarith
 end
 
-.
-
 theorem degree_theorem :
   ∃ q, q ∈ H ∧ real.sqrt (m + 1) ≤ (H ∩ q.adjacent).to_finset.card :=
 begin
@@ -400,7 +398,7 @@ begin
         by conv { to_lhs, rw [← abs_sqrt_nat, ← abs_mul] }
 
     ... ≤ abs (ε q (real.sqrt (↑m + 1) • y)) :
-        
+
         by { rw [linear_map.map_smul, smul_eq_mul, abs_mul, abs_mul],
              apply mul_le_mul_of_nonneg_left _ _,
                { apply le_of_eq, congr' 1, rw [← H_l₂, finsupp.total_apply, finsupp.sum, linear_map.map_sum],
@@ -421,7 +419,7 @@ begin
 
     ... ≤ finset.sum (l.support ∩ set.to_finset H ∩ set.to_finset (Q.adjacent q))
             (λ (x : Q (m + 1)), abs (l x) * abs ((ε q) ((f (m + 1) : _) (e x)))) :
-       
+
         by { rw[← finset.sum_subset],
                { intros x Hx, simp[-finsupp.mem_support_iff] at Hx, exact Hx.left },
                { intros x H_mem H_not_mem,
@@ -439,7 +437,7 @@ begin
                have := Hx.right.right, change Q.adjacent _ _ at this,
                rw [if_pos this.symm, mul_one], exact H_max x Hx.2.1 },
              simp only [mul_one, finset.sum_const, add_monoid.smul_one, add_monoid.smul_eq_mul] }
-        
+
     ... ≤ ↑(finset.card (set.to_finset (H ∩ Q.adjacent q))) * abs (l q) :
 
         by { refine (mul_le_mul_right ‹_›).mpr _,
